@@ -44,6 +44,13 @@
 			font-size: 85%;
 			color: grey;
 		}
+		a {
+			color: DarkGreen;
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
 	</style>
 </head>
 <body>

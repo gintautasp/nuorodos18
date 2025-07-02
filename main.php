@@ -1,21 +1,30 @@
 <?php
-	/*
-	$nuorodu_sistema = new NuoroduSistema
 
-	$nuorodu_sistema -> patikrinkUzklausa
+	include 'config.php';
+
+	include 'zymos.class.php';
+	include 'nuoroda.class.php';
+	include 'nuorodos.class.php';
+	include 'nuorodu_sistema.class.php';
+
+	$nuorodu_sistema = new NuoroduSistema();
+
+	$nuorodu_sistema -> tikrintiUzklausosDuomenis();
 	
-	jei ( $nuorodu_sistema -> gautaNaujaNuoroda ) 
-		tai $nuorodu_sistema -> issaugokNaujaNuoroda
-		
-	jei ( $nuorodu_sistema -> gautaPakeistaNuoroda ) 
-		tai $nuorodu_sistema -> issaugokPakeistaNuoroda		
-		
-	jei ( $nuorodu_sistema -> nurodytaSalintiNuoroda )
-		tai $nuorodu_sistema -> pasalinkNuoroda
-		
-	$nuorodu_sistema -> paimkNuoroduSarasa
-	*/
+	if ( $nuorodu_sistema -> arGautaNaujaNuoroda() ) {
 	
+		$nuorodu_sistema -> issaugokNaujaNuoroda();
+	}
+		
+	if ( $nuorodu_sistema -> arGautaPakeistaNuoroda() ) {
+	
+		$nuorodu_sistema -> issaugokPakeistaNuoroda();
+	}
+		
+	if ( $nuorodu_sistema -> arNurodytaSalintiNuoroda() ) {
+	
+		$nuorodu_sistema -> pasalinkNuoroda();
+	}
+	$nuorodu_sistema -> gautiDuomenis();
+
 	include 'main.html.php';
-		
-		

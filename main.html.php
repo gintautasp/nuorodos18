@@ -59,18 +59,30 @@
 	<a href="?zyma=visos">visos</a>
 </div>
 <div id="nuorodu_forma">
+<form method="POST" action="">
 <input type="submit" name="saugoti" id="saugoti" value="Saugoti">
 <label>Nuoroda</label>
-<input type="url" name="nuoroda" id="nuoroda">
+<input type="url" name="url" id="url">
 <label>Pavadinimas</label>
 <input type="text" name="pav" id="pav">
 <label>Žymos</label>
 <input type="text" name="zymos" id="zymos">
+<input type="hidden" name="id_nuorodos" id="id_nuorodos" value="0">
+</form>
 </div>
 <div id="nuorodu_sarasas">
 	<ul>
-		<li><input type="button" value="&#10006;"> <input type="button" value="&#9998;"> <a href="https://wwv.mp3juice.vet/convert">mp3 atsisiuntimo svetainė</a><span class="data">2025-05-23</span></li>
-		<li><input type="button" value="&#10006;"> <input type="button" value="&#9998;"> <a href="https://meteofor.lt/weather-kaunas-4202/">orai Kaune</a><span class="data">2025-03-11</span></li>
+<?php
+
+		foreach ( $nuorodu_sistema -> nuorodos -> sarasas as $nuoroda ) {
+?>
+		<li>
+			<input type="button" value="&#10006;"> <input type="button" value="&#9998;"> 
+			<a href="<?= $nuoroda [ 'url' ] ?>" target="blank"><?= $nuoroda [ 'pav' ] ?></a><span class="data"><?= $nuoroda ['data' ] ?></span>
+		</li>
+<?php
+		}
+?>
 	</ul>
 </div>
 </body>

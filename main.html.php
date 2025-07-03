@@ -57,6 +57,13 @@
 <div id="zymu_sarasas">
 	<h3>Žymų sarašas</h3>
 	<a href="?zyma=visos">visos</a>
+<?php
+	foreach ( $nuorodu_sistema -> zymos -> sarasas as $zyma ) {
+?>
+	<a href="?zyma=<?= $zyma [ 'zyma' ] ?>"><?= $zyma [ 'zyma' ] ?></a>	
+<?php
+	}
+?>
 </div>
 <div id="nuorodu_forma">
 <form method="POST" action="">

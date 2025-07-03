@@ -9,7 +9,7 @@
 		
 		public function __construct() {
 		
-			$this -> zymos = new Zymos();	
+			$this -> zymos = new Zymos();
 		}
 	
 		public function tikrintiUzklausosDuomenis() {
@@ -26,6 +26,11 @@
 				}
 			}		
 			// echo $this -> ar_atsiusta_nauja_nuoroda . '?';
+			
+			if ( isset ( $_GET [ 'zyma' ] ) && ( $_GET [ 'zyma' ] != 'visos' ) ) {
+			
+				$this -> pasirinkta_zyma = $_GET [ 'zyma' ];
+			}
 		}
 	
 		public function arGautaNaujaNuoroda() {
@@ -62,6 +67,6 @@
 			$this -> nuorodos = new Nuorodos( $this -> pasirinkta_zyma, $this -> paieskos_fraze  );		
 		
 			$this -> nuorodos -> gautiSarasaIsDuomenuBazes();
-			/* $this -> zymos -> gautiSarasaIsDuomenuBazes(); */
+			$this -> zymos -> gautiSarasaIsDuomenuBazes();
 		}
 	}

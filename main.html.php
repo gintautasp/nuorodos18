@@ -52,6 +52,61 @@
 			text-decoration: underline;
 		}
 	</style>
+	<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+	<script>
+		$( document ).ready ( function() {
+		
+			function duomenys_formai ( id_nuorodos, url, pav, zymos ) {
+			
+				$( '#id_nuorodos' ).val ( id_nuorodos );
+				$( '#url' ).val ( url );
+				$( '#pav' ).val ( pav );
+				$( '#zymos' ).val ( zymos );
+			}
+		
+			$( '.redaguoti_nuoroda' ).each ( function() {
+			
+				$( this ).click ( function() {
+					
+					id_nuorodos = $( this ).data( 'id_nuorodos' );
+					
+					console.log( id_nuorodos );
+				
+					$.get( 'ajax/nuoroda.php?id=' + id_nuorodos, function( data ) {
+					
+						if ( data.substring( 0, 7 ) == 'klaida:' ) { 
+					
+							$( '#result' ).html( data );
+							
+						} else {
+						
+							nuoroda = JSON.parse ( data );
+						
+							duomenys_formai ( nuoroda.id, nuoroda.url, nuoroda.pav, nuoroda.zymos );
+						}
+					});
+				});
+			});
+/*		
+			$( '#ajax_testas' ).click ( function() {
+		
+				$.get( 'ajax/nuoroda.php?id=7', function( data ) {
+				
+					$( '#result' ).html( data );
+				});
+			});		
+		
+			$( '#ajax_testas' ).click ( function() {
+		
+				$.get( 'ajax/test.html', function( data ) {
+				
+					$( '#result' ).html( data );
+					alert( "Load was performed." ); 
+					});
+			});
+*/
+		});
+	</script>
 </head>
 <body>
 <div id="zymu_sarasas">
@@ -84,13 +139,16 @@
 		foreach ( $nuorodu_sistema -> nuorodos -> sarasas as $nuoroda ) {
 ?>
 		<li>
-			<input type="button" value="&#10006;"> <input type="button" value="&#9998;"> 
+			<input type="button" value="&#10006;"> <input type="button" value="&#9998;" data-id_nuorodos="<?= $nuoroda [ 'id' ]  ?>" class="redaguoti_nuoroda"> 
 			<a href="<?= $nuoroda [ 'url' ] ?>" target="blank"><?= $nuoroda [ 'pav' ] ?></a><span class="data"><?= $nuoroda ['data' ] ?></span>
 		</li>
 <?php
 		}
 ?>
 	</ul>
+	<input type="button" value="ajax textas" id="ajax_testas">
+	<div id="result">
+	</div>
 </div>
 </body>
 </html>

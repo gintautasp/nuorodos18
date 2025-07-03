@@ -47,11 +47,20 @@
 		
 		public function arGautaPakeistaNuoroda() {
 		
-			return false;
+			return $this -> ar_atsiusti_pakeisti_nuorodos_duomenys;
 		}
 		
 		public function  issaugokPakeistaNuoroda() {
 		
+			$nuoroda_sena = new Nuoroda ( '', '', '', $_POST [ 'id_nuorodos'] );
+			$nuoroda_sena -> pasiimtiDuomenis();
+			
+			$this -> zymos -> mazintiZymuKartojimosiKieki ( $nuoroda_sena ->zymos );
+		
+			$nuoroda  = new Nuoroda ( $_POST [ 'pav' ], $_POST [ 'url' ], $_POST [ 'zymos' ], $_POST [ 'id_nuorodos'] );
+			$nuoroda -> pakeistiDuomenis();
+			
+			$this -> zymos -> atnaujintiZymas( $_POST [ 'zymos' ] ); 
 		}
 		
 		public function  arNurodytaSalintiNuoroda() {

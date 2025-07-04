@@ -5,6 +5,7 @@
 		public 
 			$ar_atsiusta_nauja_nuoroda = false
 			, $ar_atsiusti_pakeisti_nuorodos_duomenys = false
+			, $ar_nurodyta_salinti_nuoroda = false
 			, $nuorodos, $zymos, 	$pasirinkta_zyma = '', $paieskos_fraze = ''	;
 		
 		public function __construct() {
@@ -30,6 +31,16 @@
 			if ( isset ( $_GET [ 'zyma' ] ) && ( $_GET [ 'zyma' ] != 'visos' ) ) {
 			
 				$this -> pasirinkta_zyma = $_GET [ 'zyma' ];
+			}
+			
+			if ( isset ( $_POST [ 'veiksmas' ] ) && (  $_POST [ 'veiksmas' ] == 'salinti' ) ) {
+			
+				$this -> ar_nurodyta_salinti_nuoroda = true;
+			}
+			
+			if ( isset ( $_POST [ 'ieskoti' ] ) && (  $_POST [ 'ieskoti' ] == 'Ieškoti' ) ) {
+			
+				$this -> paieskos_fraze = $_POST [ 'paieskos_fraze' ];
 			}
 		}
 	
@@ -65,10 +76,14 @@
 		
 		public function  arNurodytaSalintiNuoroda() {
 		
+			return $this -> ar_nurodyta_salinti_nuoroda;
 		}
 	
 		public function  pasalinkNuoroda() {
 		
+			// echo 'salinsim : ' . $_POST [ 'id_nuorodos_salinamos' ]; exit;
+			$nuoroda_salinama = new Nuoroda ( '', '', '', $_POST [ 'id_nuorodos_salinamos' ] );
+			$nuoroda_salinama -> pasalinti();
 		}
 
 		public function  gautiDuomenis() {
